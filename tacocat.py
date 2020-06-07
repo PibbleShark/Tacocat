@@ -46,7 +46,7 @@ def register():
     form = forms.RegisterForm()
     if form.validate_on_submit():
         flash("You're ready to make some tacos", "success")
-        models.User.create_users(
+        models.User.create_user(
             email=form.email.data,
             password=form.password.data
         )
@@ -80,12 +80,12 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/taco_create')
+@app.route('/taco', methods=('GET', 'POST'))
 @login_required
 def taco():
     form = forms.TacoForm()
     if form.validate_on_submit():
-        models.Taco.create(user=g.user._get_current_object(),
+        models.Taco.create(user=current_user._get_current_object(),
                            protein=form.protein.data,
                            shell=form.shell.data,
                            cheese=form.cheese.data,

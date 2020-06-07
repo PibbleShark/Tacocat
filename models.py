@@ -24,14 +24,11 @@ class User(UserMixin, Model):
 
 
 class Taco(Model):
-    user = ForeignKeyField(
-        User,
-        related_name='tacos'
-    )
     protein = CharField()
     shell = CharField()
-    cheese = BooleanField(default=False)
-    extras = TextField()
+    cheese = BooleanField(default=True)
+    extras = CharField()
+    user = ForeignKeyField(rel_model=User, related_name='tacos')
 
     class Meta:
         database = DATABASE

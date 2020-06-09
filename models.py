@@ -28,7 +28,7 @@ class Taco(Model):
     shell = CharField()
     cheese = BooleanField(default=True)
     extras = CharField()
-    user = ForeignKeyField(rel_model=User, related_name='tacos')
+    user = ForeignKeyField(model=User, related_name='tacos')
 
     class Meta:
         database = DATABASE
